@@ -63,6 +63,20 @@ dependencies {
     api ("androidx.recyclerview:recyclerview:1.1.0")
     // https://mvnrepository.com/artifact/com.github.bumptech.glide/glide
     api (group= "com.github.bumptech.glide", name= "glide", version= "4.12.0")
+    // https://mvnrepository.com/artifact/com.squareup.retrofit2/retrofit
+    api (group = "com.squareup.retrofit2", name = "retrofit", version= "2.9.0")
+    // https://mvnrepository.com/artifact/com.squareup.retrofit2/converter-gson
+    api (group= "com.squareup.retrofit2", name= "converter-gson", version= "2.9.0")
+    // https=//mvnrepository.com/artifact/com.squareup.retrofit2/adapter-rxjava3
+    api (group= "com.squareup.retrofit2", name= "adapter-rxjava3", version= "2.9.0")
+    api ("com.squareup.okhttp3:logging-interceptor:4.1.0")
+    // https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp
+    api (group= "com.squareup.okhttp3", name= "okhttp", version= "4.9.1")
 
+    // https://mvnrepository.com/artifact/io.reactivex.rxjava3/rxjava
+    //api (group= "io.reactivex.rxjava3", name= "rxjava", version= "3.0.11")
+    // https=//mvnrepository.com/artifact/io.reactivex.rxjava3/rxandroid
+    //api (group= "io.reactivex.rxjava3", name= "rxandroid", version= "3.0.0")
+    api (group= "com.google.code.gson", name= "gson", version= "2.8.6")
 
 }

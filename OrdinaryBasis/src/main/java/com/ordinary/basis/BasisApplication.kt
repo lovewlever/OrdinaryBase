@@ -2,7 +2,7 @@ package com.ordinary.basis
 
 import android.app.Application
 
-class BasisApplication: Application() {
+open class BasisApplication: Application() {
 
     override fun onCreate() {
         super.onCreate()

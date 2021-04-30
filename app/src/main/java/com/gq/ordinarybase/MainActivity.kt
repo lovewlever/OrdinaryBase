@@ -4,8 +4,10 @@ import android.graphics.Color
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import com.ordinary.basis.common.MetadataCommon
 import com.ordinary.basis.common.SnackbarCommon
 import com.ordinary.basis.common.SystemUiController
+import com.ordinary.basis.common.ToastCommon
 
 class MainActivity : AppCompatActivity() {
 
@@ -17,6 +19,7 @@ class MainActivity : AppCompatActivity() {
         findViewById<Button>(R.id.btClick).setOnClickListener {
             SnackbarCommon.makeSnackbar(findViewById(R.id.snackbarAnchor),"hello")
         }
+        ToastCommon.showToast(MetadataCommon.getMetadataString("APP_CODE"))
     }
 
     override fun onResume() {

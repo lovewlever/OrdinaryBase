@@ -1,4 +1,4 @@
-package com.ordinary.basis
+package com.ordinary.basis.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
