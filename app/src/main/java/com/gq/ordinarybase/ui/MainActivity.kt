@@ -8,9 +8,6 @@ import com.ordinary.basis.ui.BasisActivity
 
 class MainActivity : BasisActivity<ActivityMainBinding>() {
 
-
-    private var i = 1
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentViewBinding { R.layout.activity_main }

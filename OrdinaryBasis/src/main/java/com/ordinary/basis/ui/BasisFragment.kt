@@ -28,7 +28,7 @@ abstract class BasisFragment<T : ViewDataBinding> : Fragment() {
     }
 
 
-    fun <T : ViewDataBinding> BasisFragment<T>.setContentViewBinding(
+    fun setContentViewBinding(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,

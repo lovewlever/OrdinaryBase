@@ -14,7 +14,6 @@ abstract class BasisDialogFragment<T : ViewDataBinding> : DialogFragment() {
     protected lateinit var binding: T
     private var dialogAttributes: DialogAttributes? = null
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         dialogAttributes?.let { attr ->
             isCancelable = attr.isCancelableClose
@@ -57,11 +56,11 @@ abstract class BasisDialogFragment<T : ViewDataBinding> : DialogFragment() {
     }
 
 
-    fun <T : ViewDataBinding> BasisDialogFragment<T>.setDialogAttributes(block: (DialogAttributes) -> DialogAttributes) {
+    fun setDialogAttributes(block: (DialogAttributes) -> DialogAttributes) {
         this.dialogAttributes = block(DialogAttributes())
     }
 
-    fun <T : ViewDataBinding> BasisDialogFragment<T>.setContentViewBinding(
+    fun setContentViewBinding(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,

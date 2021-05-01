@@ -21,13 +21,12 @@ abstract class BasisActivity<T : ViewDataBinding> : AppCompatActivity() {
     }
 
 
-    fun <T : ViewDataBinding> BasisActivity<T>.setContentViewBinding(layoutId: () -> Int) {
+    fun setContentViewBinding(layoutId: () -> Int) {
         setContentView(
             DataBindingUtil.inflate<T>(LayoutInflater.from(this), layoutId(), null, false).also {
                 this.binding = it
             }.root
         )
-
     }
 }
 

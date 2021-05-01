@@ -24,7 +24,10 @@ class DemoDialogFragment: BasisDialogFragment<DialogDemoBinding>() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View = setContentViewBinding(inflater, container, savedInstanceState) {
+
         R.layout.dialog_demo
     }
+
+
 
 }
