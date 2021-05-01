@@ -11,7 +11,7 @@ import androidx.fragment.app.viewModels
 import com.ordinary.basis.common.SystemUiController
 import com.ordinary.basis.viewmodel.BasisViewModel
 
-abstract class BasisFragment<T: ViewDataBinding>: Fragment() {
+abstract class BasisFragment<T : ViewDataBinding> : Fragment() {
 
     protected val systemUiController by lazy {
         activity?.window?.let { SystemUiController(it) }
@@ -29,11 +29,13 @@ abstract class BasisFragment<T: ViewDataBinding>: Fragment() {
 
 }
 
-inline fun <reified T: ViewDataBinding> BasisFragment<T>.setContentViewBinding(inflater: LayoutInflater,
-                                                                               container: ViewGroup?,
-                                                                               savedInstanceState: Bundle?,
-                                                                               layoutId: () -> Int): View {
-    return DataBindingUtil.inflate<T>(inflater,layoutId(),container,false).apply {
+inline fun <reified T : ViewDataBinding> BasisFragment<T>.setContentViewBinding(
+    inflater: LayoutInflater,
+    container: ViewGroup?,
+    savedInstanceState: Bundle?,
+    layoutId: () -> Int
+): View {
+    return DataBindingUtil.inflate<T>(inflater, layoutId(), container, false).apply {
         binding = this
     }.root
 }

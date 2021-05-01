@@ -8,7 +8,7 @@ import androidx.databinding.ViewDataBinding
 import com.ordinary.basis.R
 import com.ordinary.basis.common.SystemUiController
 
-abstract class BasisActivity<T: ViewDataBinding>: AppCompatActivity() {
+abstract class BasisActivity<T : ViewDataBinding> : AppCompatActivity() {
 
     protected val systemUiController by lazy {
         SystemUiController(window)
@@ -22,9 +22,9 @@ abstract class BasisActivity<T: ViewDataBinding>: AppCompatActivity() {
 
 }
 
-inline fun <reified T: ViewDataBinding> BasisActivity<T>.setContentViewBinding(layoutId: () -> Int) {
+inline fun <reified T : ViewDataBinding> BasisActivity<T>.setContentViewBinding(layoutId: () -> Int) {
     setContentView(
-        DataBindingUtil.inflate<T>(LayoutInflater.from(this),layoutId(),null,false).apply {
+        DataBindingUtil.inflate<T>(LayoutInflater.from(this), layoutId(), null, false).apply {
             binding = this
         }.root
     )
