@@ -1,10 +1,10 @@
-package com.gq.ordinarybase
+package com.gq.ordinarybase.ui
 
 import android.graphics.Color
 import android.os.Bundle
+import com.gq.ordinarybase.R
 import com.gq.ordinarybase.databinding.ActivityMainBinding
 import com.ordinary.basis.ui.BasisActivity
-import com.ordinary.basis.ui.setContentViewBinding
 
 class MainActivity : BasisActivity<ActivityMainBinding>() {
 

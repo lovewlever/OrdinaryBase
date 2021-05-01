@@ -17,7 +17,7 @@ abstract class BasisFragment<T : ViewDataBinding> : Fragment() {
         activity?.window?.let { SystemUiController(it) }
     }
 
-    lateinit var binding: T
+    protected lateinit var binding: T
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,15 +27,17 @@ abstract class BasisFragment<T : ViewDataBinding> : Fragment() {
         return super.onCreateView(inflater, container, savedInstanceState)
     }
 
+
+    fun <T : ViewDataBinding> BasisFragment<T>.setContentViewBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
+        layoutId: () -> Int
+    ): View {
+        return DataBindingUtil.inflate<T>(inflater, layoutId(), container, false).also {
+            this.binding = it
+        }.root
+    }
+
 }
 
-inline fun <reified T : ViewDataBinding> BasisFragment<T>.setContentViewBinding(
-    inflater: LayoutInflater,
-    container: ViewGroup?,
-    savedInstanceState: Bundle?,
-    layoutId: () -> Int
-): View {
-    return DataBindingUtil.inflate<T>(inflater, layoutId(), container, false).apply {
-        binding = this
-    }.root
-}

@@ -14,19 +14,20 @@ abstract class BasisActivity<T : ViewDataBinding> : AppCompatActivity() {
         SystemUiController(window)
     }
 
-    lateinit var binding: T
+    protected lateinit var binding: T
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
 
+
+    fun <T : ViewDataBinding> BasisActivity<T>.setContentViewBinding(layoutId: () -> Int) {
+        setContentView(
+            DataBindingUtil.inflate<T>(LayoutInflater.from(this), layoutId(), null, false).also {
+                this.binding = it
+            }.root
+        )
+
+    }
 }
 
-inline fun <reified T : ViewDataBinding> BasisActivity<T>.setContentViewBinding(layoutId: () -> Int) {
-    setContentView(
-        DataBindingUtil.inflate<T>(LayoutInflater.from(this), layoutId(), null, false).apply {
-            binding = this
-        }.root
-    )
-
-}
