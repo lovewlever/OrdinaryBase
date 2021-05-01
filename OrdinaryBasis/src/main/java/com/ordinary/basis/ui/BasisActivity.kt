@@ -3,7 +3,9 @@ package com.ordinary.basis.ui
 import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import com.ordinary.basis.R
 import com.ordinary.basis.common.SystemUiController
 
 abstract class BasisActivity<T: ViewDataBinding>: AppCompatActivity() {
@@ -12,14 +14,19 @@ abstract class BasisActivity<T: ViewDataBinding>: AppCompatActivity() {
         SystemUiController(window)
     }
 
-    protected lateinit var binding: T
+    lateinit var binding: T
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(setViewBinding(LayoutInflater.from(this)).apply {
-            binding = this
-        }.root)
     }
 
-    abstract fun setViewBinding(inflater: LayoutInflater): T
+}
+
+inline fun <reified T: ViewDataBinding> BasisActivity<T>.setContentViewBinding(layoutId: () -> Int) {
+    setContentView(
+        DataBindingUtil.inflate<T>(LayoutInflater.from(this),layoutId(),null,false).apply {
+            binding = this
+        }.root
+    )
+
 }

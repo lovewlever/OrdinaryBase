@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -16,25 +17,23 @@ abstract class BasisFragment<T: ViewDataBinding>: Fragment() {
         activity?.window?.let { SystemUiController(it) }
     }
 
-    protected lateinit var binding: T
+    lateinit var binding: T
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? =
-        onCreateViewBinding(inflater, container, savedInstanceState).apply {
-            binding = this
-            root.isClickable = true
-            root.isFocusable = true
-        }.root
+    ): View? {
+        return super.onCreateView(inflater, container, savedInstanceState)
+    }
 
+}
 
-    abstract fun onCreateViewBinding(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): T
-
-
+inline fun <reified T: ViewDataBinding> BasisFragment<T>.setContentViewBinding(inflater: LayoutInflater,
+                                                                               container: ViewGroup?,
+                                                                               savedInstanceState: Bundle?,
+                                                                               layoutId: () -> Int): View {
+    return DataBindingUtil.inflate<T>(inflater,layoutId(),container,false).apply {
+        binding = this
+    }.root
 }
