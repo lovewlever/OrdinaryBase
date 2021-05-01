@@ -78,5 +78,6 @@ dependencies {
     // https=//mvnrepository.com/artifact/io.reactivex.rxjava3/rxandroid
     //api (group= "io.reactivex.rxjava3", name= "rxandroid", version= "3.0.0")
     api (group= "com.google.code.gson", name= "gson", version= "2.8.6")
+    api ("org.jetbrains.kotlin:kotlin-reflect:1.4.32")
 
 }
