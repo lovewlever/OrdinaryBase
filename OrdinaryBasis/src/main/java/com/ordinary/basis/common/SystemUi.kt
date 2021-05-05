@@ -1,5 +1,6 @@
 package com.ordinary.basis.common
 
+import android.content.res.Configuration
 import android.graphics.Color
 import android.os.Build
 import android.view.View
@@ -18,6 +19,8 @@ import com.ordinary.basis.AppContext
 
 
 interface SystemUiController {
+
+    fun isDarkMode(): Boolean
 
     fun findStatusBarHeight(): Int
 
@@ -43,6 +46,12 @@ fun SystemUiController(window: Window): SystemUiController =
     SystemUiControllerImpl(window)
 
 private class SystemUiControllerImpl constructor(val window: Window) : SystemUiController {
+
+    override fun isDarkMode(): Boolean =
+        when (AppContext.application.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
+            Configuration.UI_MODE_NIGHT_YES -> true
+            else -> false
+        }
 
     override fun findStatusBarHeight(): Int {
         val resourceId =
