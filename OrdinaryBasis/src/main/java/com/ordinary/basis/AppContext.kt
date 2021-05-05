@@ -10,7 +10,7 @@ object AppContext {
 
     lateinit var application: Application
 
-    fun initialization(application: Application, basisUrl: String = "https://baidu.com/") {
+    fun initialization(application: Application, basisUrl: String) {
         this.application = application
         // 日志
         if ((application.applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE) != 0) {

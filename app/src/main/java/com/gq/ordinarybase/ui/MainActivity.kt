@@ -17,7 +17,7 @@ class MainActivity : BasisActivity<ActivityMainBinding>() {
     override fun onResume() {
         super.onResume()
         systemUiController
-            .setStatusBarIconColor(color = Color.RED, isLight = true)
+            .setStatusBarColor(color = Color.RED, isLight = true)
             .setDecorFitsSystemWindows(false)
     }
 

@@ -18,15 +18,22 @@ import com.ordinary.basis.AppContext
 
 
 interface SystemUiController {
+
     fun findStatusBarHeight(): Int
+
+    fun findNavigationBarHeight(): Int
 
     fun setDecorFitsSystemWindows(
         decorFitsSystemWindows: Boolean = false
     ): SystemUiController
 
-    fun setStatusBarIconColor(
+    fun setStatusBarColor(
         color: Int = Color.TRANSPARENT,
         isLight: Boolean = false
+    ): SystemUiController
+
+    fun setNavigationBarColor(
+        color: Int = Color.TRANSPARENT
     ): SystemUiController
 
 }
@@ -44,6 +51,15 @@ private class SystemUiControllerImpl constructor(val window: Window) : SystemUiC
             return AppContext.application.resources.getDimensionPixelSize(resourceId)
         }
         return DensityUtil.dip2px(AppContext.application, 26F)
+    }
+
+    override fun findNavigationBarHeight(): Int {
+        val resourceId =
+            AppContext.application.resources.getIdentifier("navigation_bar_height","dimen", "android")
+        if (resourceId > 0) {
+            return AppContext.application.resources.getDimensionPixelSize(resourceId)
+        }
+        return 0
     }
 
     override fun setDecorFitsSystemWindows(
@@ -67,7 +83,7 @@ private class SystemUiControllerImpl constructor(val window: Window) : SystemUiC
         return this
     }
 
-    override fun setStatusBarIconColor(
+    override fun setStatusBarColor(
         color: Int,
         isLight: Boolean
     ): SystemUiController {
@@ -79,6 +95,11 @@ private class SystemUiControllerImpl constructor(val window: Window) : SystemUiC
         } else {
             setStatusBarIconDarkColor()
         }
+        return this
+    }
+
+    override fun setNavigationBarColor(color: Int): SystemUiController {
+        window.navigationBarColor = color
         return this
     }
 
