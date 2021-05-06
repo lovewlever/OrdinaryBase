@@ -59,7 +59,7 @@ private class SystemUiControllerImpl constructor(val window: Window) : SystemUiC
         if (resourceId > 0) {
             return AppContext.application.resources.getDimensionPixelSize(resourceId)
         }
-        return DensityUtil.dip2px(AppContext.application, 26F)
+        return DensityUtil.dip2px(26F)
     }
 
     override fun findNavigationBarHeight(): Int {

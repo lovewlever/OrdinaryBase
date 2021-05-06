@@ -22,9 +22,9 @@ import com.ordinary.basis.AppContext
 @Deprecated("")
 object ToastCommon {
 
-    private val LAYOUT_PADDING by lazy { DensityUtil.dip2px(AppContext.application, 8F) }
-    private val LAYOUT_WIDTH_MAX by lazy { DensityUtil.dip2px(AppContext.application, 160F) }
-    private val LAYOUT_RADIUS by lazy { DensityUtil.dip2px(AppContext.application, 6F) }
+    private val LAYOUT_PADDING by lazy { DensityUtil.dip2px(8F) }
+    private val LAYOUT_WIDTH_MAX by lazy { DensityUtil.dip2px(160F) }
+    private val LAYOUT_RADIUS by lazy { DensityUtil.dip2px(6F) }
 
     fun showToast(str: String?, duration: Int = Toast.LENGTH_LONG) {
         Toast(AppContext.application).also { t: Toast ->

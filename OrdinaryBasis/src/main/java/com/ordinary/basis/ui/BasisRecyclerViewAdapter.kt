@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ordinary.basis.R
 import com.ordinary.basis.extension.ifNotNullAndEmpty
 import java.lang.Exception
+import kotlin.reflect.full.declaredMemberFunctions
 
 
 class BasisRecyclerViewAdapter<E> :
@@ -144,6 +145,7 @@ open class BasisRecyclerViewHolder<E, VB : ViewDataBinding>(binding: VB) :
     RecyclerView.ViewHolder(binding.root) {
 
     protected val context = binding.root.context
+    var layoutId: Int = -1
 
     open fun onBindData(entity: E, position: Int, payloads: MutableList<Any>) {
 
@@ -157,14 +159,17 @@ open class BasisRecyclerViewHolder<E, VB : ViewDataBinding>(binding: VB) :
 
     }
 
+    open fun loadLayoutId(): Int {
+        return -1
+    }
+
 }
 
 inline fun <E, reified FVH : BasisRecyclerViewHolder<E, *>,
         reified VH : BasisRecyclerViewHolder<E, *>>
         newUnionAdapter(
-    crossinline createViewHolderFooter: () -> Int = {
-        R.layout.item_footer_loading
-    }, crossinline createViewHolder: () -> Int
+    crossinline createViewHolderFooter: () -> Int,
+    crossinline createViewHolder: () -> Int
 ): BasisRecyclerViewAdapter<E> {
     return BasisRecyclerViewAdapter<E>().apply {
         onCreateViewHolderCall = { parent: ViewGroup, viewType: Int ->
