@@ -28,6 +28,13 @@ class DemoDialogFragment: BasisDialogFragment<DialogDemoBinding>() {
         R.layout.dialog_demo
     }
 
+    override fun onCreateViewNew(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        TODO("Not yet implemented")
+    }
 
 
 }
