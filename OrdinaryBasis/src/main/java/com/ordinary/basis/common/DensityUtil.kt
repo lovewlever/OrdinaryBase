@@ -1,6 +1,5 @@
 package com.ordinary.basis.common
 
-import android.content.Context
 import com.ordinary.basis.AppContext
 
 /**
@@ -84,18 +83,12 @@ object DensityUtil {
      */
     @JvmStatic
     fun getStatusBarHeight(): Int {
-        var statusHeight = -1
-        try {
-            val aClass = Class.forName("com.android.internal.R\$dimen")
-            val `object` = aClass.newInstance()
-            val height = Integer.parseInt(aClass.getField("status_bar_height").get(`object`).toString())
-            statusHeight = AppContext.application.resources.getDimensionPixelSize(height)
-        } catch (e: Exception) {
-            e.printStackTrace()
+        val resourceId =
+            AppContext.application.resources.getIdentifier("status_bar_height", "dimen", "android")
+        if (resourceId > 0) {
+            return AppContext.application.resources.getDimensionPixelSize(resourceId)
         }
-
-        return statusHeight
-
+        return DensityUtil.dip2px(26F)
     }
 
     /**
