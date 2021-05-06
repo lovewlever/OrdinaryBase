@@ -14,14 +14,30 @@ abstract class BasisDialogFragment<T : ViewDataBinding> : DialogFragment() {
     protected lateinit var binding: T
     private var dialogAttributes: DialogAttributes? = null
 
+    abstract fun onCreateViewNew(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View?
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        dialogAttributes?.isHiddenTitle?.takeIf { it }?.let {
+            dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
+        }
+        return onCreateViewNew(inflater, container, savedInstanceState)
+    }
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         dialogAttributes?.let { attr ->
             isCancelable = attr.isCancelableClose
             dialog?.let { dia ->
                 dia.setCancelable(attr.isCancelableClose)
                 dia.window?.let { wind ->
-                    attr.isHiddenTitle.takeIf { it }
-                        ?.let { wind.requestFeature(Window.FEATURE_NO_TITLE) }
                     attr.isBgTransparent.takeIf { it }?.let {
                         wind.setBackgroundDrawable(
                             ColorDrawable(
