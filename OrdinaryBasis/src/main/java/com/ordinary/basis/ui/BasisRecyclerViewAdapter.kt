@@ -148,19 +148,21 @@ open class BasisRecyclerViewHolder<E, VB : ViewDataBinding>(binding: VB) :
     var layoutId: Int = -1
 
     open fun onBindData(entity: E, position: Int, payloads: MutableList<Any>) {
-
+        setOnClickListener(entity, position)
     }
 
     open fun onBindData(entity: E, position: Int) {
-
+        setOnClickListener(entity, position)
     }
 
     open fun onBindDataByFooterView(entity: E?, position: Int, payloads: MutableList<Any>) {
-
+        entity?.let {
+            setOnClickListener(it, position)
+        }
     }
 
-    open fun loadLayoutId(): Int {
-        return -1
+    protected open fun setOnClickListener(entity: E, position: Int) {
+
     }
 
 }
