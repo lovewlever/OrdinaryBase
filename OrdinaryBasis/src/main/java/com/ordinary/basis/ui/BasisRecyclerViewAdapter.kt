@@ -13,7 +13,7 @@ import java.lang.Exception
 import kotlin.reflect.full.declaredMemberFunctions
 
 
-class BasisRecyclerViewAdapter<E>(val markArgs: Any = Any()) :
+class BasisRecyclerViewAdapter<E>(var markArgs: Any = Any()) :
     RecyclerView.Adapter<BasisRecyclerViewHolder<E, *>>() {
 
     companion object {
