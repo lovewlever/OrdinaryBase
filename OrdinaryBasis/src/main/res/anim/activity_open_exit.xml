@@ -5,15 +5,17 @@
         android:duration="425"
         android:fromYDelta="0"
         android:interpolator="@anim/fast_out_slow_in"
-        android:toYDelta="-8%" />
+        android:toYDelta="-4%" />
     <alpha
         android:duration="117"
         android:fromAlpha="1.0"
         android:interpolator="@anim/linear"
         android:toAlpha="0.9" />
 
-    <scale android:fromXScale="0"
-        android:toXScale="-8%"
-        android:fromYScale="0"
-        android:toYScale="-8%"/>
+    <scale android:fromXScale="1.0"
+        android:toXScale="0.8"
+        android:fromYScale="0.8"
+        android:toYScale="1.0"
+        android:pivotX="80%"
+        android:pivotY="80%"/>
 </set>

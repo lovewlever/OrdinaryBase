@@ -18,5 +18,5 @@
         android:fillEnabled="true"
         android:fromYDelta="0%"
         android:interpolator="@anim/accelerate_quart"
-        android:toYDelta="20%" />
+        android:toYDelta="15%" />
 </set>
