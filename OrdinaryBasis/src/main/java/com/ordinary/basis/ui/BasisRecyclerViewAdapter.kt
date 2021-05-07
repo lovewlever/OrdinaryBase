@@ -141,7 +141,7 @@ class BasisRecyclerViewAdapter<E>(val markArgs: Any = Any()) :
 
 }
 
-open class BasisRecyclerViewHolder<E, VB : ViewDataBinding>(binding: VB) :
+open class BasisRecyclerViewHolder<E, VB : ViewDataBinding>(binding: VB, adapter: BasisRecyclerViewAdapter<E>) :
     RecyclerView.ViewHolder(binding.root) {
 
     protected val context = binding.root.context
@@ -184,7 +184,7 @@ inline fun <E, reified FVH : BasisRecyclerViewHolder<E, *>,
                         false
                     )
                     val constructors = clazz.constructors
-                    constructors.toMutableList()[0].call(vh)
+                    constructors.toMutableList()[0].call(vh, this)
                 }
                 else -> {
                     val clazz = VH::class
@@ -195,7 +195,7 @@ inline fun <E, reified FVH : BasisRecyclerViewHolder<E, *>,
                         false
                     )
                     val constructors = clazz.constructors
-                    constructors.toMutableList()[0].call(vh)
+                    constructors.toMutableList()[0].call(vh, this)
                 }
             }
 

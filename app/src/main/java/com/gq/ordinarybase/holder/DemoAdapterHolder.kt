@@ -1,9 +1,10 @@
 package com.gq.ordinarybase.holder
 
 import com.gq.ordinarybase.databinding.ItemDemoStringBinding
+import com.ordinary.basis.ui.BasisRecyclerViewAdapter
 import com.ordinary.basis.ui.BasisRecyclerViewHolder
 
-class DemoAdapterHolder(val binding: ItemDemoStringBinding) : BasisRecyclerViewHolder<String,ItemDemoStringBinding>(binding) {
+class DemoAdapterHolder(val binding: ItemDemoStringBinding, adapter: BasisRecyclerViewAdapter<String>) : BasisRecyclerViewHolder<String,ItemDemoStringBinding>(binding,adapter) {
 
 
     override fun onBindData(entity: String, position: Int, payloads: MutableList<Any>) {
