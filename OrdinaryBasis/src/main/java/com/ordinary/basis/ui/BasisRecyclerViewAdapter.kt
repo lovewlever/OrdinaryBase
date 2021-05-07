@@ -26,8 +26,8 @@ class BasisRecyclerViewAdapter<E>(var markArgs: Any = Any()) :
     private var recyclerView: RecyclerView? = null
     private var isAddFooterView: Boolean = false
     private var footerViewData: E? = null
-    private var onItemClickListener: (View, E, Int) -> Unit = { _: View, _: E, _: Int -> }
-    private var onItemLongClickListener: (View, E, Int) -> Unit = { _: View, _: E, _: Int -> }
+    var onItemClickListener: (View, E, Int) -> Unit = { _: View, _: E, _: Int -> }
+    var onItemLongClickListener: (View, E, Int) -> Unit = { _: View, _: E, _: Int -> }
 
 
     fun addFooterView(footerViewData: E) {
