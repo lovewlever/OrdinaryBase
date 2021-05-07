@@ -12,7 +12,9 @@
         android:interpolator="@anim/linear"
         android:toAlpha="0.9" />
 
-    <scale android:fromXScale="1.0"
+    <scale
+        android:duration="425"
+        android:fromXScale="1.0"
         android:toXScale="0.8"
         android:fromYScale="0.8"
         android:toYScale="1.0"
