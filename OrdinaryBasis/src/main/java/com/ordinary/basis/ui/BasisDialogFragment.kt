@@ -64,7 +64,9 @@ abstract class BasisDialogFragment<T : ViewDataBinding> : DialogFragment() {
                             attributes.width = attr.width
                         }
                         attributes.gravity = attr.gravity
-                        attributes.windowAnimations = attr.windowAnimations
+                        attr.windowAnimations.takeIf { it != 0 }?.let {
+                            attributes.windowAnimations = it
+                        }
                     }
             }
         }
