@@ -13,7 +13,7 @@ import java.lang.Exception
 import kotlin.reflect.full.declaredMemberFunctions
 
 
-class BasisRecyclerViewAdapter<E> :
+class BasisRecyclerViewAdapter<E>(val markArgs: Any = Any()) :
     RecyclerView.Adapter<BasisRecyclerViewHolder<E, *>>() {
 
     companion object {
@@ -145,7 +145,6 @@ open class BasisRecyclerViewHolder<E, VB : ViewDataBinding>(binding: VB) :
     RecyclerView.ViewHolder(binding.root) {
 
     protected val context = binding.root.context
-    var layoutId: Int = -1
 
     open fun onBindData(entity: E, position: Int, payloads: MutableList<Any>) {
         setOnClickListener(entity, position)
