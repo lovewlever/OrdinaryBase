@@ -3,7 +3,7 @@
     android:shareInterpolator="false"
     android:zAdjustment="top">
     <alpha
-        android:duration="500"
+        android:duration="300"
         android:fillAfter="true"
         android:fillBefore="false"
         android:fillEnabled="true"

@@ -5,7 +5,7 @@
         android:duration="425"
         android:fromYDelta="0"
         android:interpolator="@anim/fast_out_slow_in"
-        android:toYDelta="-4%" />
+        android:toYDelta="-8%" />
     <alpha
         android:duration="117"
         android:fromAlpha="1.0"
