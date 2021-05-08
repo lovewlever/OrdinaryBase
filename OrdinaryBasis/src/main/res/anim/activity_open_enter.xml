@@ -11,7 +11,7 @@
         android:interpolator="@anim/decelerate_quart"
         android:toAlpha="1.0" />
     <translate
-        android:duration="600"
+        android:duration="800"
         android:fillAfter="true"
         android:fillBefore="true"
         android:fillEnabled="true"
