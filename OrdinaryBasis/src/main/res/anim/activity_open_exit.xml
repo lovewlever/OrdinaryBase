@@ -16,8 +16,8 @@
         android:duration="425"
         android:fromXScale="1.0"
         android:toXScale="0.8"
-        android:fromYScale="0.8"
-        android:toYScale="1.0"
-        android:pivotX="80%"
+        android:fromYScale="1.0"
+        android:toYScale="0.8"
+        android:pivotX="50%"
         android:pivotY="80%"/>
 </set>
