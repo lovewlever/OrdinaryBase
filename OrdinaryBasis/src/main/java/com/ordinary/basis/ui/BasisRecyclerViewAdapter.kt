@@ -22,7 +22,7 @@ class BasisRecyclerViewAdapter<E>(var markArgs: Any = Any()) :
     }
 
     lateinit var onCreateViewHolderCall: (parent: ViewGroup, viewType: Int) -> BasisRecyclerViewHolder<E, *>
-    private val datas by lazy { mutableListOf<E>() }
+    val datas = mutableListOf<E>()
     private var recyclerView: RecyclerView? = null
     private var isAddFooterView: Boolean = false
     private var footerViewData: E? = null
