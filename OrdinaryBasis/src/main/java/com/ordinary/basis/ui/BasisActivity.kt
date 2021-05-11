@@ -22,11 +22,7 @@ abstract class BasisActivity<T : ViewDataBinding> : AppCompatActivity() {
 
 
     fun setContentViewBinding(layoutId: () -> Int) {
-        setContentView(
-            DataBindingUtil.inflate<T>(LayoutInflater.from(this), layoutId(), null, false).also {
-                this.binding = it
-            }.root
-        )
+        binding = DataBindingUtil.setContentView(this, layoutId())
     }
 }
 
