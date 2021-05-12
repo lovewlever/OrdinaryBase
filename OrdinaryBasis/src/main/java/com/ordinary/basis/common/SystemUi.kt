@@ -7,6 +7,7 @@ import android.view.View
 import android.view.Window
 import android.view.WindowInsetsController
 import android.view.WindowManager
+import androidx.appcompat.app.AppCompatDelegate
 import com.ordinary.basis.AppContext
 
 
@@ -21,6 +22,8 @@ import com.ordinary.basis.AppContext
 interface SystemUiController {
 
     fun isDarkMode(): Boolean
+
+    fun setDefaultUiMode(uiMode: Int)
 
     fun findStatusBarHeight(): Int
 
@@ -47,11 +50,32 @@ fun SystemUiController(window: Window): SystemUiController =
 
 private class SystemUiControllerImpl constructor(val window: Window) : SystemUiController {
 
-    override fun isDarkMode(): Boolean =
-        when (AppContext.application.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
-            Configuration.UI_MODE_NIGHT_YES -> true
-            else -> false
+    override fun isDarkMode(): Boolean {
+        return when (AppCompatDelegate.getDefaultNightMode()) {
+            AppCompatDelegate.MODE_NIGHT_YES -> true
+            AppCompatDelegate.MODE_NIGHT_NO -> false
+            else -> {
+                when (AppContext.application.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
+                    Configuration.UI_MODE_NIGHT_YES -> true
+                    else -> false
+                }
+            }
         }
+    }
+
+    override fun setDefaultUiMode(uiMode: Int) {
+        when (uiMode) {
+            Configuration.UI_MODE_NIGHT_NO -> {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
+            Configuration.UI_MODE_NIGHT_YES -> {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            }
+            Configuration.UI_MODE_NIGHT_UNDEFINED -> {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+            }
+        }
+    }
 
     override fun findStatusBarHeight(): Int {
         val resourceId =
