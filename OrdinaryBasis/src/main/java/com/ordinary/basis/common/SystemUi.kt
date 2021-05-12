@@ -76,7 +76,7 @@ private class SystemUiControllerImpl constructor(val window: Window) : SystemUiC
                 }
             }
             Configuration.UI_MODE_NIGHT_UNDEFINED -> {
-                if (AppCompatDelegate.getDefaultNightMode() != AppCompatDelegate.MODE_NIGHT_YES) {
+                if (AppCompatDelegate.getDefaultNightMode() != AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM) {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
                 }
             }
