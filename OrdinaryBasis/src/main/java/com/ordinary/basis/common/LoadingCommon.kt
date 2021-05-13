@@ -36,19 +36,21 @@ object LoadingCommon {
         return dialog
     }
 
-    fun showLoadingToastDialog(
-        activity: Activity,
-        msg: String,
+    fun showToastDialog(
+        activity: Activity?,
+        msg: String?,
         timeOut: Int = Toast.LENGTH_LONG
     ) {
-        val dialog = LoadingDialog(activity).apply {
-            show()
-            setText(msg)
-            hideProgressBar()
+        activity?.let { ctx ->
+            val dialog = LoadingDialog(ctx).apply {
+                show()
+                setText(msg ?: "")
+                hideProgressBar()
+            }
+            handler.postDelayed({
+                dialog.dismiss()
+            }, timeOut.toLong())
         }
-        handler.postDelayed({
-            dialog.dismiss()
-        }, timeOut.toLong())
     }
 }
 
