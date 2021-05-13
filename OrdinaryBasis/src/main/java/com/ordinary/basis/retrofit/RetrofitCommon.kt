@@ -29,7 +29,7 @@ object RetrofitCommon {
     fun initialization(
         baseUrl: String,
         interceptor: MutableList<Interceptor> = mutableListOf(printResponse()),
-        factory: CallAdapter.Factory? = null,
+        factoryCallAdapter: CallAdapter.Factory? = null,
         factoryConverter: Converter.Factory = CustomGsonConverterFactory.create()
     ) {
         val okHttpClient: OkHttpClient =
@@ -53,7 +53,7 @@ object RetrofitCommon {
             .baseUrl(baseUrl)
             .client(okHttpClient)
             .apply {
-                factory?.let {
+                factoryCallAdapter?.let {
                     addCallAdapterFactory(it)
                 }
             }
