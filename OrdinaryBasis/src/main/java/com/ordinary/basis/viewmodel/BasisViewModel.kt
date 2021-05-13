@@ -11,7 +11,7 @@ import com.ordinary.basis.repository.AppRepository
 
 open class BasisViewModel(application: Application): AndroidViewModel(application), LifecycleObserver {
 
-    private val _resultErrorEntity = MutableLiveData<ResultEntity<*>>()
+    protected val _resultErrorEntity = MutableLiveData<ResultEntity<*>>()
     val resultErrorEntity: LiveData<ResultEntity<*>> = _resultErrorEntity
 
 }
