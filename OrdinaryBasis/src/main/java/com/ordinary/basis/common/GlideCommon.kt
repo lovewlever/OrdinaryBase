@@ -5,7 +5,6 @@ import android.net.Uri
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
-import com.facebook.drawee.view.SimpleDraweeView
 import com.ordinary.basis.AppContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
