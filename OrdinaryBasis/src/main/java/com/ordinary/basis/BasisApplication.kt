@@ -6,5 +6,6 @@ open class BasisApplication: Application() {
 
     override fun onCreate() {
         super.onCreate()
+        AppContext.initialization(this)
     }
 }

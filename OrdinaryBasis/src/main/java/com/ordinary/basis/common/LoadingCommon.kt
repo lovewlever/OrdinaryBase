@@ -24,7 +24,7 @@ object LoadingCommon {
     fun showLoadingDialog(
         activity: Activity,
         msg: String = "加载中...",
-        timeOut: Long = 5000,
+        timeOut: Long = 6000,
         textSize: Int = 12
     ): LoadingDialog {
         val dialog = LoadingDialog(activity).apply {
@@ -40,7 +40,7 @@ object LoadingCommon {
     fun showToastDialog(
         activity: Activity?,
         msg: String?,
-        timeOut: Long = 1500,
+        timeOut: Long = 1600,
         textSize: Int = 13
     ) {
         activity?.let { ctx ->
@@ -72,7 +72,7 @@ class LoadingDialog(context: Context) :
     fun setText(str: String, ts: Int = 12) {
         findViewById<TextView>(R.id.tv_message).apply {
             text = str
-            textSize = DensityUtil.dip2px(ts.toFloat()).toFloat()
+            textSize = ts.toFloat()
         }
     }
 

@@ -67,7 +67,7 @@ dependencies {
     // https://mvnrepository.com/artifact/com.squareup.retrofit2/converter-gson
     api (group: "com.squareup.retrofit2", name: "converter-gson", version: "2.9.0")
     // https://mvnrepository.com/artifact/com.squareup.retrofit2/adapter-rxjava3
-    api (group: "com.squareup.retrofit2", name: "adapter-rxjava3", version: "2.9.0")
+    //api (group: "com.squareup.retrofit2", name: "adapter-rxjava3", version: "2.9.0")
     api ("com.squareup.okhttp3:logging-interceptor:4.1.0")
     // https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp
     api (group: "com.squareup.okhttp3", name: "okhttp", version: "4.9.1")
