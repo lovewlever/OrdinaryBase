@@ -44,7 +44,7 @@ object RetrofitCommon {
         retrofitInstance = Retrofit.Builder()
             .baseUrl(baseUrl)
             .client(okHttpClient)
-            .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
+            //.addCallAdapterFactory(RxJava3CallAdapterFactory.create())
             .addConverterFactory(CustomGsonConverterFactory.create())
             .build()
     }
