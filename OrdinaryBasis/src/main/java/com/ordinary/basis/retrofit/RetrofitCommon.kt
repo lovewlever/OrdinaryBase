@@ -3,6 +3,8 @@ package com.ordinary.basis.retrofit
 import com.ordinary.basis.retrofit.converter.CustomGsonConverterFactory
 import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.CallAdapter
+import retrofit2.Converter
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -26,14 +28,22 @@ object RetrofitCommon {
         return retrofitInstance.create(service.java)
     }
 
-    fun initialization(baseUrl: String) {
+    fun initialization(
+        baseUrl: String,
+        interceptor: MutableList<Interceptor> = mutableListOf(printResponse()),
+        factory: CallAdapter.Factory? = null,
+        factoryConverter: Converter.Factory = CustomGsonConverterFactory.create()
+    ) {
         val okHttpClient: OkHttpClient =
             OkHttpClient.Builder()
                 .proxy(Proxy.NO_PROXY)
                 .cookieJar(saveCookie())
-                .addInterceptor(printResponse())
+                .apply {
+                    interceptor.forEach {
+                        addInterceptor(it)
+                    }
+                }
                 .retryOnConnectionFailure(true)//允许重试
-                //.addInterceptor(loginEventInterceptor())
                 .connectTimeout(5, TimeUnit.SECONDS)
                 .readTimeout(10, TimeUnit.SECONDS).build()
         /*okHttpClient = if ("" == ApiConstants.CACHE_PATH) {
@@ -44,8 +54,12 @@ object RetrofitCommon {
         retrofitInstance = Retrofit.Builder()
             .baseUrl(baseUrl)
             .client(okHttpClient)
-            //.addCallAdapterFactory(RxJava3CallAdapterFactory.create())
-            .addConverterFactory(CustomGsonConverterFactory.create())
+            .apply {
+                factory?.let {
+                    addCallAdapterFactory(it)
+                }
+            }
+            .addConverterFactory(factoryConverter)
             .build()
     }
 

@@ -24,11 +24,12 @@ object LoadingCommon {
     fun showLoadingDialog(
         activity: Activity,
         msg: String = "加载中...",
-        timeOut: Long = 5000
+        timeOut: Long = 5000,
+        textSize: Int = 12
     ): LoadingDialog {
         val dialog = LoadingDialog(activity).apply {
             show()
-            setText(msg)
+            setText(msg, textSize)
         }
         handler.postDelayed({
             dialog.dismiss()
@@ -39,17 +40,18 @@ object LoadingCommon {
     fun showToastDialog(
         activity: Activity?,
         msg: String?,
-        timeOut: Int = Toast.LENGTH_LONG
+        timeOut: Long = 1500,
+        textSize: Int = 13
     ) {
         activity?.let { ctx ->
             val dialog = LoadingDialog(ctx).apply {
                 show()
-                setText(msg ?: "")
+                setText(msg ?: "", textSize)
                 hideProgressBar()
             }
             handler.postDelayed({
                 dialog.dismiss()
-            }, timeOut.toLong())
+            }, timeOut)
         }
     }
 }
@@ -67,8 +69,11 @@ class LoadingDialog(context: Context) :
 
     }
 
-    fun setText(str: String) {
-        findViewById<TextView>(R.id.tv_message).text = str
+    fun setText(str: String, ts: Int = 12) {
+        findViewById<TextView>(R.id.tv_message).apply {
+            text = str
+            textSize = DensityUtil.dip2px(ts.toFloat()).toFloat()
+        }
     }
 
     fun hideProgressBar() {
