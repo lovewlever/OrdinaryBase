@@ -1,5 +1,6 @@
 package com.ordinary.basis.retrofit
 
+import com.ordinary.basis.AppContext
 import com.ordinary.basis.retrofit.converter.CustomGsonConverterFactory
 import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
@@ -7,6 +8,7 @@ import retrofit2.CallAdapter
 import retrofit2.Converter
 import retrofit2.Retrofit
 import timber.log.Timber
+import java.io.File
 import java.io.UnsupportedEncodingException
 import java.net.Proxy
 import java.util.concurrent.TimeUnit
@@ -28,36 +30,46 @@ object RetrofitCommon {
 
     fun initialization(
         baseUrl: String,
-        interceptor: MutableList<Interceptor> = mutableListOf(printResponse()),
-        factoryCallAdapter: CallAdapter.Factory? = null,
-        factoryConverter: Converter.Factory = CustomGsonConverterFactory.create()
+        cache: Boolean = false,
+        interceptor: MutableList<Interceptor>? = null,
+        interceptorNetwork: MutableList<Interceptor>? = null,
+        factoryCallAdapter: MutableList<CallAdapter.Factory>? = null,
+        factoryConverter: MutableList<Converter.Factory>? = null
     ) {
         val okHttpClient: OkHttpClient =
             OkHttpClient.Builder()
                 .proxy(Proxy.NO_PROXY)
                 .cookieJar(saveCookie())
+                .addInterceptor(printResponse())
                 .apply {
-                    interceptor.forEach {
+                    interceptor?.forEach {
                         addInterceptor(it)
+                    }
+                    interceptorNetwork?.forEach {
+                        addNetworkInterceptor(it)
+                    }
+                    if (cache) {
+                        val cacheDir = AppContext.application.cacheDir
+                        cache(Cache(cacheDir, (10 * 1024 * 1024).toLong()))
                     }
                 }
                 .retryOnConnectionFailure(true)//允许重试
                 .connectTimeout(5, TimeUnit.SECONDS)
-                .readTimeout(10, TimeUnit.SECONDS).build()
-        /*okHttpClient = if ("" == ApiConstants.CACHE_PATH) {
-            builder.build()
-        } else {
-            builder.cache(Cache(File(ApiConstants.CACHE_PATH), (10 * 1024 * 1024).toLong())).build()
-        } */
+                .readTimeout(10, TimeUnit.SECONDS)
+                .build()
+
         retrofitInstance = Retrofit.Builder()
             .baseUrl(baseUrl)
             .client(okHttpClient)
             .apply {
-                factoryCallAdapter?.let {
+                factoryCallAdapter?.forEach {
                     addCallAdapterFactory(it)
                 }
+                addConverterFactory(CustomGsonConverterFactory.create())
+                factoryConverter?.forEach {
+                    addConverterFactory(it)
+                }
             }
-            .addConverterFactory(factoryConverter)
             .build()
     }
 
@@ -71,7 +83,7 @@ object RetrofitCommon {
             override fun log(message: String) {
                 try {
                     //val text = URLDecoder.decode(message, "utf-8")
-                    Timber.e(message)
+                    Timber.i(message)
                 } catch (e: UnsupportedEncodingException) {
                     Timber.e(e)
                 }
