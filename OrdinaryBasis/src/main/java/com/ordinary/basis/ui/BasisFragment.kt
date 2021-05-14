@@ -7,9 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import com.ordinary.basis.common.SystemUiController
-import com.ordinary.basis.viewmodel.BasisViewModel
 
 abstract class BasisFragment<T : ViewDataBinding> : Fragment() {
 
@@ -18,6 +16,8 @@ abstract class BasisFragment<T : ViewDataBinding> : Fragment() {
     }
 
     protected lateinit var binding: T
+    // 是否已执行过onViewCreatedSingle
+    private var itHasBeenExecuted = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,6 +27,17 @@ abstract class BasisFragment<T : ViewDataBinding> : Fragment() {
         return super.onCreateView(inflater, container, savedInstanceState)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        if (!itHasBeenExecuted) {
+            onViewCreatedSingle(view, savedInstanceState)
+            itHasBeenExecuted = true
+        }
+    }
+
+    protected open fun onViewCreatedSingle(view: View, savedInstanceState: Bundle?) {
+
+    }
 
     fun setContentViewBinding(
         inflater: LayoutInflater,
