@@ -1,11 +1,13 @@
 package com.ordinary.basis.extension
 
 import android.graphics.Color
+import android.net.Uri
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.facebook.drawee.view.SimpleDraweeView
 import com.ordinary.basis.ui.newUnionAdapter
 import org.jetbrains.annotations.NotNull
 
@@ -40,6 +42,16 @@ fun setTextViewTextColor(tv: TextView, color: String) {
     } catch (e: Exception) {
         tv.setTextColor(Color.BLACK)
     }
+}
+
+@BindingAdapter(value = ["loadSdvImageUrl"])
+fun loadSdvImage(sdv: SimpleDraweeView, url: String) {
+    sdv.setImageURI(Uri.parse(url), sdv.context)
+}
+
+@BindingAdapter(value = ["loadSdvImageURI"])
+fun loadSdvImageURI(sdv: SimpleDraweeView, uri: Uri) {
+    sdv.setImageURI(uri, sdv.context)
 }
 
 

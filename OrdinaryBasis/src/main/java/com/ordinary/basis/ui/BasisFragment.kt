@@ -45,9 +45,13 @@ abstract class BasisFragment<T : ViewDataBinding> : Fragment() {
         savedInstanceState: Bundle?,
         layoutId: () -> Int
     ): View {
-        return DataBindingUtil.inflate<T>(inflater, layoutId(), container, false).also {
-            this.binding = it
-        }.root
+        return if (this::binding.isInitialized) {
+            binding.root
+        } else {
+            DataBindingUtil.inflate<T>(inflater, layoutId(), container, false).also {
+                this.binding = it
+            }.root
+        }
     }
 
 }
