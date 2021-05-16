@@ -7,12 +7,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.ordinary.basis.R
 import com.ordinary.basis.extension.ifNotNullAndEmpty
-import java.lang.Exception
-import kotlin.reflect.full.declaredMemberFunctions
 
-
+@Deprecated("使用[BasicPagingRecyclerAdapter]")
 class BasisRecyclerViewAdapter<E>(var markArgs: Any = Any()) :
     RecyclerView.Adapter<BasisRecyclerViewHolder<E, *>>() {
 
@@ -143,6 +140,8 @@ class BasisRecyclerViewAdapter<E>(var markArgs: Any = Any()) :
 
 }
 
+
+@Deprecated("使用[BasicPagingRecyclerHolder]")
 open class BasisRecyclerViewHolder<E, VB : ViewDataBinding>(binding: VB, adapter: BasisRecyclerViewAdapter<E>) :
     RecyclerView.ViewHolder(binding.root) {
 
@@ -168,6 +167,8 @@ open class BasisRecyclerViewHolder<E, VB : ViewDataBinding>(binding: VB, adapter
 
 }
 
+
+@Deprecated("使用[newPagingRecyclerAdapter]")
 inline fun <E, reified FVH : BasisRecyclerViewHolder<E, *>,
         reified VH : BasisRecyclerViewHolder<E, *>>
         newUnionAdapter(
