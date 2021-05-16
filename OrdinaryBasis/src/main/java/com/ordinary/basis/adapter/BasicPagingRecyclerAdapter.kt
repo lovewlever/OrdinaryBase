@@ -63,12 +63,6 @@ open class BasicPagingRecyclerHolder<E : Any, VB : ViewDataBinding>(
         setOnClickListener(entity, position)
     }
 
-    open fun onBindDataByFooterView(entity: E?, position: Int, payloads: MutableList<Any>) {
-        entity?.let {
-            setOnClickListener(it, position)
-        }
-    }
-
     protected open fun setOnClickListener(entity: E, position: Int) {
 
     }
