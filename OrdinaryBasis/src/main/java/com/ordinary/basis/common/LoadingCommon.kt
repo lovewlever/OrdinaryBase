@@ -22,28 +22,30 @@ object LoadingCommon {
     private val handler by lazy { Handler(Looper.getMainLooper()) }
 
     fun showLoadingDialog(
-        activity: Activity,
+        context: Context?,
         msg: String = "加载中...",
         timeOut: Long = 6000,
         textSize: Int = 12
-    ): LoadingDialog {
-        val dialog = LoadingDialog(activity).apply {
-            show()
-            setText(msg, textSize)
-        }
-        handler.postDelayed({
-            dialog.dismiss()
-        }, timeOut)
-        return dialog
+    ): LoadingDialog? {
+        context?.let { ctx ->
+            val dialog = LoadingDialog(ctx).apply {
+                show()
+                setText(msg, textSize)
+            }
+            handler.postDelayed({
+                dialog.dismiss()
+            }, timeOut)
+            return dialog
+        } ?: return null
     }
 
     fun showToastDialog(
-        activity: Activity?,
+        context: Context?,
         msg: String?,
         timeOut: Long = 1600,
         textSize: Int = 13
     ) {
-        activity?.let { ctx ->
+        context?.let { ctx ->
             val dialog = LoadingDialog(ctx).apply {
                 setCancelable(true)
                 setCanceledOnTouchOutside(true)
