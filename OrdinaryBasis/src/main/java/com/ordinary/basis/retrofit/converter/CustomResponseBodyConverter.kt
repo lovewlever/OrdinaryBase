@@ -23,7 +23,7 @@ class CustomResponseBodyConverter<T>(val gson: Gson, val adapter: TypeAdapter<T>
             if (data.isJsonObject) {
                 parseString.remove("data")
                 parseString.add("data",JsonArray().apply { add(data) })
-            } else if (data.isJsonNull) {
+            } else if (data.isJsonPrimitive) {
                 val asString = data.asString
                 parseString.remove("data")
                 parseString.add("data",JsonArray().apply { add(asString) })
