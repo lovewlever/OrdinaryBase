@@ -45,6 +45,8 @@ object LoadingCommon {
     ) {
         activity?.let { ctx ->
             val dialog = LoadingDialog(ctx).apply {
+                setCancelable(true)
+                setCanceledOnTouchOutside(true)
                 show()
                 setText(msg ?: "", textSize)
                 hideProgressBar()
