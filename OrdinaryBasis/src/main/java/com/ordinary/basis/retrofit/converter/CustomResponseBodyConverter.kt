@@ -20,9 +20,13 @@ class CustomResponseBodyConverter<T>(val gson: Gson, val adapter: TypeAdapter<T>
         if (parseString is JsonObject) {
             val data = parseString.get("data")
             // 如果 data是对象 转为数组
-            if (data is JsonObject) {
+            if (data.isJsonObject) {
                 parseString.remove("data")
                 parseString.add("data",JsonArray().apply { add(data) })
+            } else if (data.isJsonNull) {
+                val asString = data.asString
+                parseString.remove("data")
+                parseString.add("data",JsonArray().apply { add(asString) })
             }
         } else {
             parseString = JsonParser.parseString(gson.toJson(ResultEntity<T>()))
