@@ -44,9 +44,9 @@ object LoadingCommon {
     ) {
         context?.let { ctx ->
             val dialog = LoadingDialog(ctx).apply {
+                show()
                 setCancelable(true)
                 setCanceledOnTouchOutside(true)
-                show()
                 setText(msg ?: "", textSize)
                 hideProgressBar()
             }
