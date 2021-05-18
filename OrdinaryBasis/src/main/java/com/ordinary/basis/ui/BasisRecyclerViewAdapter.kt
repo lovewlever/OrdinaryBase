@@ -54,8 +54,8 @@ class BasisRecyclerViewAdapter<E>(var markArgs: Any = Any()) :
 
     fun setData(list: MutableList<E>) {
         val dataSize = itemCount
-        notifyItemRangeRemoved(0, dataSize)
         this.datas.clear()
+        notifyItemRangeRemoved(0, dataSize)
         this.datas.addAll(list)
         notifyItemRangeInserted(0, list.size)
     }
