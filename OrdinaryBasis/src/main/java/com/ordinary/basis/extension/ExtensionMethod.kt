@@ -52,6 +52,30 @@ inline fun TabLayout.addOnTabSelectedListener(crossinline onTabSelected:(tab: Ta
     })
 }
 
+/**
+ * List<String>转字符串
+ */
+inline fun Collection<String>.toStringSplicing(delimiter: String): String {
+    val sb = StringBuilder()
+    this.forEach { s: String ->
+        sb.append(s).append(delimiter)
+    }
+    if (sb.isNotEmpty()) {
+        sb.deleteCharAt(sb.length - 1)
+    }
+    return sb.toString()
+}
+
+/**
+ * 字符串转MutableList<String>
+ */
+inline fun String.toStringSegmentation(delimiter: String): MutableList<String> {
+    return this.split(delimiter).ifNotNullAndEmpty {
+        it.remove("")
+        it
+    } ?: mutableListOf()
+}
+
 inline fun <E,R> Collection<E>?.ifNotNullAndEmpty(block: (MutableList<E>) -> R): R? {
     if (!this.isNullOrEmpty()) {
         return block(this.toMutableList())
