@@ -6,7 +6,6 @@ import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.ordinary.basis.entities.ResultEntity
-import com.ordinary.basis.repository.AppRepository
 
 
 open class BasisViewModel(application: Application): AndroidViewModel(application), LifecycleObserver {
