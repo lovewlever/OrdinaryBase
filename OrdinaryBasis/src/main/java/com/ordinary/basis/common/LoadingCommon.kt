@@ -1,6 +1,5 @@
 package com.ordinary.basis.common
 
-import android.app.Activity
 import android.content.Context
 import android.os.Bundle
 import android.os.Handler
@@ -8,8 +7,6 @@ import android.os.Looper
 import android.view.Window
 import android.widget.ProgressBar
 import android.widget.TextView
-import android.widget.Toast
-import androidx.core.os.postDelayed
 import com.ordinary.basis.R
 
 /**
