@@ -61,9 +61,8 @@ class BasisRecyclerViewAdapter<E>(var markArgs: Any = Any()) :
     }
 
     fun addData(e: E) {
-        val dataSize = itemCount
         this.datas.add(e)
-        notifyItemRangeInserted(dataSize, itemCount)
+        notifyItemInserted(itemCount)
     }
 
     fun addDataAll(list: MutableList<E>) {
