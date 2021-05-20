@@ -70,7 +70,7 @@ open class BasicPagingRecyclerHolder<E : Any, VB : ViewDataBinding>(
 }
 
 inline fun <E : Any, reified VH : BasicPagingRecyclerHolder<E, *>> newPagingRecyclerAdapter(
-    setAdapterRecyclerView: RecyclerView? = null,
+    loadStateHeaderAndFooterRecyclerView: RecyclerView? = null,
     crossinline createViewHolder: () -> Int
 ): BasicPagingRecyclerAdapter<E> {
     return BasicPagingRecyclerAdapter<E>(diffCallback = DiffCallback()).apply {
@@ -86,7 +86,7 @@ inline fun <E : Any, reified VH : BasicPagingRecyclerHolder<E, *>> newPagingRecy
             constructors.toMutableList()[0].call(vh, this)
         }
     }.apply {
-        setAdapterRecyclerView?.adapter = withLoadStateHeaderAndFooter(
+        loadStateHeaderAndFooterRecyclerView?.adapter = withLoadStateHeaderAndFooter(
             header = LoadStateHeaderRecyclerAdapter(this::refresh),
             footer = LoadStateFooterRecyclerAdapter(this::retry)
         )
