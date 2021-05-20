@@ -51,7 +51,7 @@ class BasicPagingRecyclerAdapter<E : Any>(
 open class BasicPagingRecyclerHolder<E : Any, VB : ViewDataBinding>(
     binding: VB,
     adapter: BasicPagingRecyclerAdapter<E>
-): RecyclerView.ViewHolder(binding.root) {
+) : RecyclerView.ViewHolder(binding.root) {
 
     protected val context = binding.root.context
 
@@ -69,8 +69,8 @@ open class BasicPagingRecyclerHolder<E : Any, VB : ViewDataBinding>(
 
 }
 
-inline fun <E: Any,reified VH : BasicPagingRecyclerHolder<E, *>>
-        newPagingRecyclerAdapter(
+inline fun <E : Any, reified VH : BasicPagingRecyclerHolder<E, *>> newPagingRecyclerAdapter(
+    setAdapterRecyclerView: RecyclerView? = null,
     crossinline createViewHolder: () -> Int
 ): BasicPagingRecyclerAdapter<E> {
     return BasicPagingRecyclerAdapter<E>(diffCallback = DiffCallback()).apply {
@@ -85,6 +85,11 @@ inline fun <E: Any,reified VH : BasicPagingRecyclerHolder<E, *>>
             val constructors = clazz.constructors
             constructors.toMutableList()[0].call(vh, this)
         }
+    }.apply {
+        setAdapterRecyclerView?.adapter = withLoadStateHeaderAndFooter(
+            header = LoadStateHeaderRecyclerAdapter(this::refresh),
+            footer = LoadStateFooterRecyclerAdapter(this::retry)
+        )
     }
 }
 
