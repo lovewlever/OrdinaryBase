@@ -28,7 +28,7 @@
             android:layout_marginStart="6dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorBlue"
+            android:textColor="#349AF9"
             android:text="点击重试"
             android:textSize="13sp" />
     </LinearLayout>
