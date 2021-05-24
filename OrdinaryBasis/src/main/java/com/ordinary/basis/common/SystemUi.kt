@@ -111,12 +111,14 @@ private class SystemUiControllerImpl constructor(val window: Window) : SystemUiC
                 .windowInsetsController?.systemBarsBehavior =
                 WindowInsetsController.BEHAVIOR_SHOW_BARS_BY_SWIPE
         } else {
-            window
-                .decorView
-                .systemUiVisibility =
-                View.SYSTEM_UI_FLAG_FULLSCREEN or
-                        View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or
-                        View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS or
+                    WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION)
+            window.decorView.systemUiVisibility =
+                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+            window.statusBarColor = Color.TRANSPARENT
+
+            window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
         }
 
         return this
@@ -155,12 +157,17 @@ private class SystemUiControllerImpl constructor(val window: Window) : SystemUiC
                     WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
                 )
         } else {
-            window
-                .decorView
-                .systemUiVisibility = window
-                .decorView
-                .systemUiVisibility or
-                    View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+
+                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+                window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+                window.statusBarColor = Color.TRANSPARENT
+                window.decorView.systemUiVisibility =
+                    View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or
+                            View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                window.decorView.systemUiVisibility =
+                    window.decorView.systemUiVisibility or
+                            View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+
         }
     }
 
@@ -177,11 +184,20 @@ private class SystemUiControllerImpl constructor(val window: Window) : SystemUiC
                     WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
                 )
         } else {
-            window
-                .decorView
-                .systemUiVisibility = window
-                .decorView
-                .systemUiVisibility
+
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION)
+            window.statusBarColor = Color.TRANSPARENT
+            window.navigationBarColor = Color.TRANSPARENT
+            window.decorView.systemUiVisibility =
+                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or
+                        View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                window.decorView.systemUiVisibility =
+                    window.decorView.systemUiVisibility or View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
+            }
+
         }
     }
 
