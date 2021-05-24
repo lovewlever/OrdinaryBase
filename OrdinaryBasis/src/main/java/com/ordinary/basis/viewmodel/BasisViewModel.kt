@@ -1,10 +1,7 @@
 package com.ordinary.basis.viewmodel
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.*
 import com.ordinary.basis.entities.ResultEntity
 
 
@@ -13,4 +10,8 @@ open class BasisViewModel(application: Application): AndroidViewModel(applicatio
     protected val _resultErrorEntity = MutableLiveData<ResultEntity<*>>()
     val resultErrorEntity: LiveData<ResultEntity<*>> = _resultErrorEntity
 
+    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
+    protected fun lifecycleEventOnStop() {
+        _resultErrorEntity.value = ResultEntity<String>()
+    }
 }

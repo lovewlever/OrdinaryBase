@@ -42,17 +42,19 @@ object LoadingCommon {
         timeOut: Long = 1600,
         textSize: Int = 13
     ) {
-        context?.let { ctx ->
-            val dialog = LoadingDialog(ctx).apply {
-                show()
-                setCancelable(true)
-                setCanceledOnTouchOutside(true)
-                setText(msg ?: "", textSize)
-                hideProgressBar()
+        msg?.takeIf { it != "" }?.let { str ->
+            context?.let { ctx ->
+                val dialog = LoadingDialog(ctx).apply {
+                    show()
+                    setCancelable(true)
+                    setCanceledOnTouchOutside(true)
+                    setText(str, textSize)
+                    hideProgressBar()
+                }
+                handler.postDelayed({
+                    dialog.dismiss()
+                }, timeOut)
             }
-            handler.postDelayed({
-                dialog.dismiss()
-            }, timeOut)
         }
     }
 }
