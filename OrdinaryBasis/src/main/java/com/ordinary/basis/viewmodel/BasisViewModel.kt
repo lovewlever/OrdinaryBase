@@ -11,7 +11,7 @@ open class BasisViewModel(application: Application): AndroidViewModel(applicatio
     val resultErrorEntity: LiveData<ResultEntity<*>> = _resultErrorEntity
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
-    protected fun lifecycleEventOnStop() {
+    protected open fun lifecycleEventOnStop() {
         _resultErrorEntity.value = ResultEntity<String>()
     }
 }
