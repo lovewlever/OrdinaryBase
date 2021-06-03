@@ -4,6 +4,7 @@ import android.graphics.Color
 import android.os.Bundle
 import com.gq.ordinarybase.R
 import com.gq.ordinarybase.databinding.ActivityMainBinding
+import com.ordinary.basis.entities.ResultSealed
 import com.ordinary.basis.ui.BasisActivity
 
 class MainActivity : BasisActivity<ActivityMainBinding>() {
